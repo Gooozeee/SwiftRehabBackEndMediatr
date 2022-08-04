@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  userdb:
+    image: postgres
+  
+  pgadmin:
+    image: dpage/pgadmin4
+
+  portainer:
+    image: portainer/portainer-ce
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  swiftusermanagement.api:
+    image: ${DOCKER_REGISTRY-}swiftusermanagementapi
+    build:
+      context: .
+      dockerfile: SwiftUserManagement.API/Dockerfile
+ 
+  GameAnalysisRabbitMQClient:
+    image: ${DOCKER_REGISTRY-}python-gameanalysis
+    build:
+      context: .
+      dockerfile: GameAnalysis/Dockerfile
+
+  VideoAnalysisRabbitMQClient:
+    image: ${DOCKER_REGISTRY-}python-videoanalysis
+    build:
+      context: .
+      dockerfile: VideoAnalysis/Dockerfile
+
+volumes:
+  mongo_data:
+  portainer_data:
+  postgres_data:
+  pgadmin_data:
