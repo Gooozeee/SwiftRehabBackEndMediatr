@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SwiftUserManagement.API.Entities;
+﻿using SwiftUserManagement.Domain.Entities;
 
-namespace SwiftUserManagement.API.Repositories
+namespace SwiftUserManagement.Application.Contracts.Persistence
 {
 
     public interface IUserRepository 

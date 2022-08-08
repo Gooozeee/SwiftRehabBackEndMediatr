@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SwiftUserManagement.API.Extensions;
 using SwiftUserManagement.API.Repositories;
+using SwiftUserManagement.API.Extensions;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,9 +41,9 @@ builder.Services.AddSwaggerGen(option =>
 }); ;
 
 // Setting up the user repository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IJWTManagementRepository, JWTManagementRepository>();
-builder.Services.AddScoped<IRabbitMQRepository, RabbitMQRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IJWTManagementRepository, JWTManagementRepository>();
+//builder.Services.AddScoped<IRabbitMQRepository, RabbitMQRepository>();
 
 // Configuring JWT authentication
 builder.Services.AddAuthentication(x =>

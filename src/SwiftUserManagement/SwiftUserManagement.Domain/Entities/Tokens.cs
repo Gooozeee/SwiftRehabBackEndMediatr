@@ -1,4 +1,4 @@
-﻿namespace SwiftUserManagement.API.Entities
+﻿namespace SwiftUserManagement.Domain.Entities
 {
     // Tokens entity class to be used to store JWT Tokens
     public class Tokens

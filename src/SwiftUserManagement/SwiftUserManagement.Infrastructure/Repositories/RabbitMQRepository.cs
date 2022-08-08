@@ -1,11 +1,14 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using SwiftUserManagement.API.Entities;
+using SwiftUserManagement.Application.Contracts.Infrastructure;
+using SwiftUserManagement.Domain.Entities;
 using System.IO;
 using System.Text;
 using System.Text.Json;
 
-namespace SwiftUserManagement.API.Repositories
+namespace SwiftUserManagement.Infrastructure.Repositories
 {
     // Concrete class for emitting tasks out to the rabbitMQ queue
     public class RabbitMQRepository : IRabbitMQRepository

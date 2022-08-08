@@ -1,4 +1,4 @@
-﻿namespace SwiftUserManagement.API.Entities
+﻿namespace SwiftUserManagement.Domain.Entities
 {
     // Entity which is used for showing where the video data is stored
     public class Video

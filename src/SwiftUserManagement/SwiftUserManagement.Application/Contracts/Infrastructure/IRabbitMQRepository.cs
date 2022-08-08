@@ -1,6 +1,7 @@
-﻿using SwiftUserManagement.API.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using SwiftUserManagement.Domain.Entities;
 
-namespace SwiftUserManagement.API.Repositories
+namespace SwiftUserManagement.Application.Contracts.Infrastructure
 {
     public interface IRabbitMQRepository
     {

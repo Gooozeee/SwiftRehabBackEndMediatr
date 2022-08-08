@@ -1,6 +1,6 @@
-﻿using SwiftUserManagement.API.Entities;
+﻿using SwiftUserManagement.Domain.Entities;
 
-namespace SwiftUserManagement.API.Repositories
+namespace SwiftUserManagement.Application.Contracts.Infrastructure
 {
     // Interface for managing JWT tokens
     public interface IJWTManagementRepository

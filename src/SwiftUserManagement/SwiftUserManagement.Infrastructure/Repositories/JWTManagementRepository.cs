@@ -1,11 +1,14 @@
-﻿using BCrypt.Net;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SwiftUserManagement.API.Entities;
+using SwiftUserManagement.Application.Contracts.Infrastructure;
+using SwiftUserManagement.Application.Contracts.Persistence;
+using SwiftUserManagement.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SwiftUserManagement.API.Repositories
+namespace SwiftUserManagement.Infrastructure.Repositories
 {
     // Concrete class for authenticating users using JWT
     public class JWTManagementRepository : IJWTManagementRepository

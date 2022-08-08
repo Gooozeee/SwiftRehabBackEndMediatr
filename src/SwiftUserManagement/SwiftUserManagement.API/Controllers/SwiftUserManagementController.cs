@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SwiftUserManagement.API.Entities;
-using SwiftUserManagement.API.Repositories;
+using SwiftUserManagement.Domain.Entities;
 using System.IO;
 using System.Net;
 

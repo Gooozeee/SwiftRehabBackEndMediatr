@@ -1,4 +1,4 @@
-﻿namespace SwiftUserManagement.API.Entities
+﻿namespace SwiftUserManagement.Domain.Entities
 {
     // Entity which will hold the result from the game
     public class GameResults

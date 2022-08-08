@@ -1,9 +1,11 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using Npgsql;
-using SwiftUserManagement.API.Entities;
 
-namespace SwiftUserManagement.API.Repositories
+using Npgsql;
+using SwiftUserManagement.Application.Contracts.Persistence;
+
+namespace SwiftUserManagement.Infrastructure.Persistence
 {
     public class UserRepository : IUserRepository
     {
@@ -94,7 +96,7 @@ namespace SwiftUserManagement.API.Repositories
         public async Task<bool> AddVideoAnalysisData(string videoName, int userId, string weaknessPrediction)
         {
             using var connection = new NpgsqlConnection
-                (_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+                (_configuration["DatabaseSettings:ConnectionString"]);
 
             var affected = await connection.ExecuteAsync
                 ("INSERT INTO Videos(User_Id, Video_Name, Weakness_Prediction) VALUES(@User_Id, @Video_Name, @Weakness_Prediction)",
