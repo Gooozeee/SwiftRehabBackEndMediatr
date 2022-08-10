@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using SwiftUserManagement.Application.Contracts.Infrastructure;
-using SwiftUserManagement.Domain.Entities;
 
 namespace SwiftUserManagement.Application.Features.Commands.AnalyseGameResults
 {

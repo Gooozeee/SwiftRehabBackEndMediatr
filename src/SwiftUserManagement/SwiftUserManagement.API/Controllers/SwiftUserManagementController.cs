@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SwiftUserManagement.Application.Features.Commands.AnalyseGameResults;
+using SwiftUserManagement.Application.Features.Commands.AnalyseVideoResults;
 using SwiftUserManagement.Application.Features.Commands.AuthenticateUser;
 using SwiftUserManagement.Application.Features.Commands.CreateUser;
 using SwiftUserManagement.Application.Features.Queries.GetUser;
@@ -96,44 +97,30 @@ namespace SwiftUserManagement.API.Controllers
             return Ok(receivedData);
         }
 
-        //// Receiving video data from the React client
-        ////[Authorize]
-        //[HttpPost("analyseVideo", Name = "AnalyseVideo")]
-        //[ProducesResponseType((int)HttpStatusCode.OK)]
-        //[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        //public ActionResult<bool> AnalyseVideoResult([FromForm] List<IFormFile> videoData, string userName)
-        //{
-        //    var user = _userRepository.GetUser(userName);
+        // Receiving video data from the React client
+       [Authorize]
+       [HttpPost("analyseVideo", Name = "AnalyseVideo")]
+       [ProducesResponseType((int)HttpStatusCode.OK)]
+       [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<string>> AnalyseVideoResult([FromForm] List<IFormFile> videoData, string userName)
+        {
+            var query = new GetUserQuery(userName);
+            var user = _mediator.Send(query);
 
-        //    if (user.Result.Id == -1 ) 
-        //        return BadRequest(new { Message = "User not found" });
+            if (user == null) return BadRequest(new { Message = "User not found" });
 
-        //    if (videoData.Count < 1 || videoData.Count > 1)
-        //        return BadRequest(new { Message = "Please only send one video file" });
+            // Send the first file in the array for analysis
+            var videoQuery = new AnalyseVideoResultsCommand(videoData, userName, user.Id);
+            var response = await _mediator.Send(videoQuery);
 
-        //    if (!videoData[0].ContentType.Contains("video"))
-        //    {
-        //        return BadRequest(new { Message = "Please upload a video" });
-        //    }
+            if (response == "Not able to add data into database")
+                return BadRequest(new { Message = "Not able to add data into database" });
 
-        //    // Send the first file in the array for analysis
-        //    _logger.LogInformation("Sending video file to python script for analysis");
-        //    _rabbitMQRepository.EmitVideoAnalysis(videoData[0]);
-        //    var fileName = videoData[0].FileName;
+            if (response == "The request has timed out")
+                return BadRequest(new { Message = "The request has timed out" });
 
-        //    _logger.LogInformation("Waiting for response from python script");
-
-        //    string response = _rabbitMQRepository.ReceiveVideoAnalysis();
-
-        //    _logger.LogInformation("Adding analysis results into database");
-        //    if (!(_userRepository.AddVideoAnalysisData(fileName, user.Result.Id, response).Result))
-        //        return BadRequest(new { Message = "Not able to add data into database" });
-
-        //    if (response == "The request has timed out")
-        //        return BadRequest(new { Message = "The request has timed out" });
-
-        //    return Ok($"File analysed: " +
-        //        $"{response}");
-        //}
+            return Ok($"File analysed: " +
+                $"{response}");
+        }
     }
 }
