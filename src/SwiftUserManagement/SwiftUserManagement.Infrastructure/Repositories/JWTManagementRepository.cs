@@ -27,18 +27,18 @@ namespace SwiftUserManagement.Infrastructure.Repositories
 
 
         // Code to see if a user matches, 
-        public Tokens Authenticate(string email, string password)
+        public async Task<Tokens> Authenticate(string email, string password)
         {
-            var foundUserFromDb = _userRepository.GetUserByEmail(email);
+            var foundUserFromDb = await _userRepository.GetUserByEmail(email);
 
            
-           if(foundUserFromDb.Result.Id == -1)
+           if(foundUserFromDb.Id == -1)
             {
                 return new Tokens { Token = "Unauthorized" };
             }
 
             // If the user password and username don't match
-            if (foundUserFromDb.Result.Email == email && BCrypt.Net.BCrypt.Verify(password, foundUserFromDb.Result.Password))
+            if (foundUserFromDb.Email == email && BCrypt.Net.BCrypt.Verify(password, foundUserFromDb.Password))
             {
                 // Generate token
                 var tokenHandler = new JwtSecurityTokenHandler();

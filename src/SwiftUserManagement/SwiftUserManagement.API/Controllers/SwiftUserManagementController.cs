@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SwiftUserManagement.Application.Features.Commands.AuthenticateUser;
 using SwiftUserManagement.Application.Features.Commands.CreateUser;
 using SwiftUserManagement.Application.Features.Queries.GetUser;
 using SwiftUserManagement.Domain.Entities;
@@ -39,7 +40,7 @@ namespace SwiftUserManagement.API.Controllers
 
         // Retreiving a user from the database
         [HttpGet("{userName}", Name = "GetUser")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public ActionResult<User> getUser(string userName)
@@ -54,30 +55,30 @@ namespace SwiftUserManagement.API.Controllers
             return Ok(user.Result);
         }
 
-        //// Letting the client know it is connected to the server
-        //[AllowAnonymous]
-        //[HttpGet("pingServer", Name = "Ping")]
-        //public string pingServer()
-        //{
-        //    return "You are connected to the server";
-        //}
+        // Letting the client know it is connected to the server
+        [AllowAnonymous]
+        [HttpGet("pingServer", Name = "Ping")]
+        public string pingServer()
+        {
+            return "You are connected to the server";
+        }
 
-        //// Authenticating a user and returning a JWT token
-        //[AllowAnonymous]
-        //[HttpPost("auth", Name = "Authenticate")]
-        //[ProducesResponseType(typeof(Tokens), (int)HttpStatusCode.OK)]
-        //[ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        //public ActionResult<Tokens> Authenticate(string email, string password)
-        //{
-        //    var token = _jwtMangementRepository.Authenticate(email, password);
+        // Authenticating a user and returning a JWT token
+        [AllowAnonymous]
+        [HttpPost("auth", Name = "Authenticate")]
+        [ProducesResponseType(typeof(Tokens), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<ActionResult<Tokens>> Authenticate(AuthenticateUserCommand tokenRequest)
+        {
+            var token = await _mediator.Send(tokenRequest);
 
-        //    if (token == null)
-        //    {
-        //        return Unauthorized();
-        //    }
+            if (token == null)
+            {
+                return Unauthorized();
+            }
 
-        //    return Ok(token);
-        //}
+            return Ok(token);
+        }
 
         //// Emitting the game results for analysis by the python file
         ////[Authorize]
