@@ -6,7 +6,7 @@ namespace SwiftUserManagement.Application.Contracts.Infrastructure
     public interface IRabbitMQRepository
     {
 
-        bool EmitGameAnalysis(GameResults gameResults);
+        Task<bool> EmitGameAnalysis(string result1, string result2);
         string ReceiveGameAnalysis();
         Task<bool> EmitVideoAnalysis(IFormFile video);
         string ReceiveVideoAnalysis();

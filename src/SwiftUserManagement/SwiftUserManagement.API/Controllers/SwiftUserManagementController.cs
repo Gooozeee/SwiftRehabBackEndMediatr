@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SwiftUserManagement.Application.Features.Commands.AnalyseGameResults;
 using SwiftUserManagement.Application.Features.Commands.AuthenticateUser;
 using SwiftUserManagement.Application.Features.Commands.CreateUser;
 using SwiftUserManagement.Application.Features.Queries.GetUser;
@@ -80,24 +81,20 @@ namespace SwiftUserManagement.API.Controllers
             return Ok(token);
         }
 
-        //// Emitting the game results for analysis by the python file
-        ////[Authorize]
-        //[HttpPost("analyseGameScore", Name = "AnalyseGameScore")]
-        //[ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        //[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        //public ActionResult<bool> AnalyseGameResults([FromBody] GameResults gameResults)
-        //{
-        //    if(gameResults == null)
-        //        return BadRequest(new { Message = "Invalid game data" });
+        // Emitting the game results for analysis by the python file
+        //[Authorize]
+        [HttpPost("analyseGameScore", Name = "AnalyseGameScore")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<bool>> AnalyseGameResults([FromBody] AnalyseGameResultsCommand gameResults)
+        {
+            var receivedData = await _mediator.Send(gameResults);
 
-        //    var result = _rabbitMQRepository.EmitGameAnalysis(gameResults);
-        //    if (!result) 
-        //        return BadRequest(new { Message = "User not found" });
+            if(receivedData == "User not found")
+                return BadRequest(new { Message = "User not found" });
 
-        //    var receivedData = _rabbitMQRepository.ReceiveGameAnalysis();
-
-        //    return Ok(receivedData);
-        //}
+            return Ok(receivedData);
+        }
 
         //// Receiving video data from the React client
         ////[Authorize]

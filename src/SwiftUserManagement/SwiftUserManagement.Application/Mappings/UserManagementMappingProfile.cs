@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SwiftUserManagement.Application.Features.Commands.AnalyseGameResults;
 using SwiftUserManagement.Application.Features.Commands.AuthenticateUser;
 using SwiftUserManagement.Application.Features.Commands.CreateUser;
 using SwiftUserManagement.Application.Features.Queries.GetUser;
@@ -18,6 +19,7 @@ namespace SwiftUserManagement.Application.Mappings
             CreateMap<User, CreateUserCommand>().ReverseMap();
             CreateMap<User, UserVm>().ReverseMap();
             CreateMap<Tokens, TokenVM>().ReverseMap();
+            CreateMap<GameResults, AnalyseGameResultsCommand>().ReverseMap();
         }
     }
 }

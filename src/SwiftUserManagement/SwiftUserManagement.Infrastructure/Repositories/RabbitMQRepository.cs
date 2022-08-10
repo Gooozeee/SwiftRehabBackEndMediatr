@@ -21,9 +21,9 @@ namespace SwiftUserManagement.Infrastructure.Repositories
         }
 
         // Sending out the game score analysis task to the queue
-        public bool EmitGameAnalysis(GameResults gameResults)
+        public async Task<bool> EmitGameAnalysis(string result1, string result2)
         {
-            if (gameResults.result1 == null)
+            if (result1 == null)
             {
                 return false;
             }
@@ -39,6 +39,7 @@ namespace SwiftUserManagement.Infrastructure.Repositories
                                         type: "topic");
 
                 var routingKey = "game.score.fromApp";
+                var gameResults = new GameResults(result1, result2);
                 var message = JsonSerializer.Serialize(gameResults);
                 var body = Encoding.UTF8.GetBytes(message);
                 channel.BasicPublish(exchange: "swift_rehab_app",
