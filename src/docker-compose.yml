@@ -17,7 +17,7 @@ services:
     image: ${DOCKER_REGISTRY-}swiftusermanagementapi
     build:
       context: .
-      dockerfile: SwiftUserManagement.API/Dockerfile
+      dockerfile: SwiftUserManagement/SwiftUserManagement.API/Dockerfile
  
   GameAnalysisRabbitMQClient:
     image: ${DOCKER_REGISTRY-}python-gameanalysis

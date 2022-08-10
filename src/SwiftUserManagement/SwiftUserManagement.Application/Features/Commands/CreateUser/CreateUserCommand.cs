@@ -1,10 +1,10 @@
-﻿
-namespace SwiftUserManagement.Domain.Entities
-{
+﻿using MediatR;
 
-    public class User 
+namespace SwiftUserManagement.Application.Features.Commands.CreateUser
+{
+    public class CreateUserCommand : IRequest<int>
     {
-        public int Id { get; set; }        
+        public int Id { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
