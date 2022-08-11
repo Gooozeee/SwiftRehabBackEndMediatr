@@ -4,7 +4,7 @@ ASP.NET Core web API made to work with the final year dissertation project Swift
 
 The controller and main bulk of the code is written in ASP.NET Core, each service is containerised and there are two Python files used for analysis of the examination data from the front end. This data is sent over to the C# controller, and the controller then sends this data out to the Python files via MassTransit (RabbitMQ).
 All data is stored on a PostgreSQL database which communicates with the ASP.NET Core API through a repository.
-The code is organised using Clean Architecture and commands/queries are controlled and validated by using the Mediator design pattern. (MediatR package)
+The code is organised using Clean Architecture and commands/queries are controlled and validated by using the CQRS and Mediator design patterns. (MediatR package)
 
 
 To see and manage all of the containers visit localhost:9000. Use username: admin and password adminadmin123
