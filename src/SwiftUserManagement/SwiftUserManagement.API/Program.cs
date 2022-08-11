@@ -42,9 +42,6 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices(builder.Configuration);
-
 // Configuring JWT authentication
 builder.Services.AddAuthentication(x =>
 {
@@ -65,6 +62,9 @@ builder.Services.AddAuthentication(x =>
         IssuerSigningKey = new SymmetricSecurityKey(Key)
     };
 });
+
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 

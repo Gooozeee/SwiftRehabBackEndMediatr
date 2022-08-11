@@ -11,6 +11,10 @@ namespace SwiftUserManagement.Application.Features.Commands.AnalyseVideoResults
 
             RuleFor(video => video.VideoData[0].ContentType)
                 .Must(contentType => contentType.Contains("video"));
+
+            RuleFor(user => user.UserName)
+                .NotEmpty().WithMessage("Username must not be empty")
+                .NotNull().WithMessage("Username must not be null");
         }
     }
 }

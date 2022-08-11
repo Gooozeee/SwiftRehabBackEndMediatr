@@ -13,7 +13,7 @@ namespace SwiftUserManagement.Infrastructure
         {
 
             // Setting up the repositories
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddScoped<IJWTManagementRepository, JWTManagementRepository>();
             services.AddScoped<IRabbitMQRepository, RabbitMQRepository>();
             return services;

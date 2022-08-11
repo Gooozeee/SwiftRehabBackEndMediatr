@@ -1,7 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-
 using Npgsql;
 using SwiftUserManagement.Application.Contracts.Persistence;
 using SwiftUserManagement.Domain.Entities;
@@ -53,6 +51,7 @@ namespace SwiftUserManagement.Infrastructure.Persistence
             return user;
         }
 
+        // Getting a user by email
         public async Task<User> GetUserByEmail(string email)
         {
             using var connection = new NpgsqlConnection
@@ -100,6 +99,24 @@ namespace SwiftUserManagement.Infrastructure.Persistence
                 ("INSERT INTO Videos(User_Id, Video_Name, Weakness_Prediction) VALUES(@User_Id, @Video_Name, @Weakness_Prediction)",
                 new { User_Id = userId, Video_Name = videoName, Weakness_Prediction =  weaknessPrediction });
 
+
+            if (affected == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Adding game analysis data to the database for a user
+        public async Task<bool> AddGameAnalysisData(int result1, int result2, int userId, int level, string explanation)
+        {
+            using var connection = new NpgsqlConnection
+                (_configuration["DatabaseSettings:ConnectionString"]);
+
+            var affected = await connection.ExecuteAsync
+                ("INSERT INTO GameScores(User_Id, Level, Score, Explanation) VALUES(@User_Id, @level, @result_1, @Explanation)",
+                new { User_Id = userId, level = level, result_1 = result1 + result2, Explanation = explanation });
 
             if (affected == 0)
             {

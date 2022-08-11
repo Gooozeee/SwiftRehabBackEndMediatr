@@ -9,7 +9,10 @@ namespace SwiftUserManagement.Application.Features.Commands.AnalyseGameResults
 {
     public class AnalyseGameResultsCommand : IRequest<string>
     {
-        public string result1 { get; set; }
-        public string result2 { get; set; }
+        public string UserName { get; set; }
+        public int User_Id { get; set; }
+        public int result1 { get; set; }
+        public int result2 { get; set; }
+        public int level { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace SwiftUserManagement.Infrastructure.Repositories
         }
 
         // Sending out the game score analysis task to the queue
-        public async Task<bool> EmitGameAnalysis(string result1, string result2)
+        public async Task<bool> EmitGameAnalysis(int result1, int result2)
         {
             if (result1 == null)
             {

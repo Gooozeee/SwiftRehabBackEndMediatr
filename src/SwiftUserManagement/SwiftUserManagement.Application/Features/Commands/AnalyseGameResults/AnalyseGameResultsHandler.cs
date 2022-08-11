@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
 using MediatR;
 using SwiftUserManagement.Application.Contracts.Infrastructure;
+using SwiftUserManagement.Application.Contracts.Persistence;
 
 namespace SwiftUserManagement.Application.Features.Commands.AnalyseGameResults
 {
     public class AnalyseGameResultsHandler : IRequestHandler<AnalyseGameResultsCommand, string>
     {
         private readonly IRabbitMQRepository _rabbitMQRepository;
-        private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepository;
 
-        public AnalyseGameResultsHandler(IRabbitMQRepository rabbitMQRepository, IMapper mapper)
+        public AnalyseGameResultsHandler(IRabbitMQRepository rabbitMQRepository, IUserRepository userRepository)
         {
             _rabbitMQRepository = rabbitMQRepository ?? throw new ArgumentNullException(nameof(rabbitMQRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
         public async Task<string> Handle(AnalyseGameResultsCommand request, CancellationToken cancellationToken)
@@ -22,6 +23,8 @@ namespace SwiftUserManagement.Application.Features.Commands.AnalyseGameResults
                 return "User not found";
 
             var receivedData = _rabbitMQRepository.ReceiveGameAnalysis();
+
+            await _userRepository.AddGameAnalysisData(request.result1, request.result2, request.User_Id, request.level, receivedData);
 
             return receivedData;
         }

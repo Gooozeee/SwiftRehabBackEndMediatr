@@ -83,12 +83,22 @@ namespace SwiftUserManagement.API.Controllers
         }
 
         // Emitting the game results for analysis by the python file
-        //[Authorize]
+        [Authorize]
         [HttpPost("analyseGameScore", Name = "AnalyseGameScore")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<bool>> AnalyseGameResults([FromBody] AnalyseGameResultsCommand gameResults)
         {
+        
+            // Getting the user so that the user id can be passed through
+            var query = new GetUserQuery(gameResults.UserName);
+            var user = await _mediator.Send(query);
+
+            if(user == null) 
+                return BadRequest(new { Message = "User doesn't exist"});
+
+            gameResults.User_Id = user.Id;
+            
             var receivedData = await _mediator.Send(gameResults);
 
             if(receivedData == "User not found")

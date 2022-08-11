@@ -10,5 +10,6 @@ namespace SwiftUserManagement.Application.Contracts.Persistence
         Task<bool> CreateUser(string email, string userName, string password, string role);
         Task<bool> UpdateUser(User user);
         Task<bool> AddVideoAnalysisData(string videoName, int userId, string weaknessPrediction);
+        Task<bool> AddGameAnalysisData(int result1, int result2, int userId, int level, string explanation);
     }
 }
