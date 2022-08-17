@@ -45,7 +45,7 @@ docker cp container_id:/src/VideoAnalysis/UploadedVideos/Video.mov filepath to w
    check with kubectl get pods
 
 ----- Removing pods -------
-delete them with kubectl delete deployments --all
+Delete them with kubectl delete deployments --all
 kubectl delete services --all
 
 -------- Installing rabbitmq on kubernetes ----------
