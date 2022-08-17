@@ -51,6 +51,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftUserManagement.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftUserManagement.Infrastructure", "SwiftUserManagement\SwiftUserManagement.Infrastructure\SwiftUserManagement.Infrastructure.csproj", "{0EDD7B0B-13BC-48C0-8904-4931BD4687F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KubernetesDeployment", "KubernetesDeployment", "{FB32C927-D9CF-4B24-B993-468C434255B9}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesDeployment\RabbitMQ\RabbitMQ-Deploy.yml = KubernetesDeployment\RabbitMQ\RabbitMQ-Deploy.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python-GameAnalysis", "Python-GameAnalysis", "{512617A5-1E5D-4A2B-9AC3-EB0B70791E59}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesDeployment\Python-GameAnalysis\python-gameanalysis-deploy.yml = KubernetesDeployment\Python-GameAnalysis\python-gameanalysis-deploy.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python-VideoAnalysis", "Python-VideoAnalysis", "{BE61A655-587D-4E47-B0A6-33305E270862}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesDeployment\Python-VideoAnalysis\python-videoanalysis-deploy.yml = KubernetesDeployment\Python-VideoAnalysis\python-videoanalysis-deploy.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SwiftUserManagement", "SwiftUserManagement", "{FD7EF7AC-4F90-4FB2-92E7-A3C8C21D485E}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesDeployment\SwiftUserManagement\postgres-configmap.yml = KubernetesDeployment\SwiftUserManagement\postgres-configmap.yml
+		KubernetesDeployment\SwiftUserManagement\PostgresVolume.yml = KubernetesDeployment\SwiftUserManagement\PostgresVolume.yml
+		KubernetesDeployment\SwiftUserManagement\swiftusermanagement-deploy.yml = KubernetesDeployment\SwiftUserManagement\swiftusermanagement-deploy.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{055E229C-6C73-4CD6-934F-266CEFBB9B55}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesDeployment\RabbitMQ\RabbitMQ-Deploy.yml = KubernetesDeployment\RabbitMQ\RabbitMQ-Deploy.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +159,11 @@ Global
 		{822CBD13-913C-4130-A6C2-8DCDAE48019F} = {03D24DAA-EDE3-4256-9C87-64510904A3EE}
 		{570244C7-D84D-4118-B2FB-674B4BD3B0D8} = {03D24DAA-EDE3-4256-9C87-64510904A3EE}
 		{0EDD7B0B-13BC-48C0-8904-4931BD4687F2} = {03D24DAA-EDE3-4256-9C87-64510904A3EE}
+		{FB32C927-D9CF-4B24-B993-468C434255B9} = {11A299BE-51D4-48C0-8516-906F4AB46298}
+		{512617A5-1E5D-4A2B-9AC3-EB0B70791E59} = {FB32C927-D9CF-4B24-B993-468C434255B9}
+		{BE61A655-587D-4E47-B0A6-33305E270862} = {FB32C927-D9CF-4B24-B993-468C434255B9}
+		{FD7EF7AC-4F90-4FB2-92E7-A3C8C21D485E} = {FB32C927-D9CF-4B24-B993-468C434255B9}
+		{055E229C-6C73-4CD6-934F-266CEFBB9B55} = {FB32C927-D9CF-4B24-B993-468C434255B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D8BC0A0-B964-43D6-B3A3-A78C758EAB27}

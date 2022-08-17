@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "helm": "^0.2.1"
+  }
+}
